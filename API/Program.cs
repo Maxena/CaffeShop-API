@@ -1,3 +1,4 @@
+using Caffe.Application;
 using Caffe.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddInfrastructureServices(builder.Configuration);
+
+
+builder.Services
+    .AddInfrastructureServices(builder.Configuration)
+    .AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 

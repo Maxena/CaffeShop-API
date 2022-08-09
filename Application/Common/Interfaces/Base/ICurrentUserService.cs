@@ -1,4 +1,4 @@
-﻿namespace Caffe.Application.Common.Interfaces;
+﻿namespace Caffe.Application.Common.Interfaces.Base;
 
 public interface ICurrentUserService
 {

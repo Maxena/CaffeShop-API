@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Caffe.Application.Common.Interfaces;
+using Caffe.Application.Common.Interfaces.Presistence;
 using Caffe.Domain.Entities;
 using Caffe.Infrastructure.Common;
 using Caffe.Infrastructure.Identity;

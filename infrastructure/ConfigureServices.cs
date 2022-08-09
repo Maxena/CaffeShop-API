@@ -1,7 +1,12 @@
-﻿using Caffe.Application.Common.Interfaces;
+﻿using Caffe.Application.Common.Interfaces.Authentication;
+using Caffe.Application.Common.Interfaces.Base;
+using Caffe.Application.Common.Interfaces.Files;
+using Caffe.Application.Common.Interfaces.Presistence;
 using Caffe.Infrastructure.Identity;
 using Caffe.Infrastructure.Presistence;
-using Caffe.Infrastructure.Services;
+using Caffe.Infrastructure.Services.Authentication;
+using Caffe.Infrastructure.Services.Base;
+using Caffe.Infrastructure.Services.Files;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,8 +23,10 @@ public static class ConfigureServices
                 builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-        
+
         services.AddScoped<ApplicationDbContextInitialiser>();
+
+        services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
 
         services
             .AddDefaultIdentity<ApplicationUser>()
@@ -28,9 +35,10 @@ public static class ConfigureServices
 
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
-        //services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
+        services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
+        services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
 
-        
+
         return services;
     }
 }

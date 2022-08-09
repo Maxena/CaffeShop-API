@@ -1,4 +1,5 @@
-﻿using Caffe.Application.Common.Interfaces;
+﻿using Caffe.Application.Common.Interfaces.Base;
+using Caffe.Application.Common.Interfaces.Presistence;
 using Caffe.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;

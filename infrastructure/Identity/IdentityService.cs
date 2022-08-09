@@ -1,4 +1,4 @@
-﻿using Caffe.Application.Common.Interfaces;
+﻿using Caffe.Application.Common.Interfaces.Authentication;
 using Caffe.Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

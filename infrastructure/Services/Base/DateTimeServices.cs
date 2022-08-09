@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Caffe.Application.Common.Interfaces;
+using Caffe.Application.Common.Interfaces.Presistence;
 
-namespace Caffe.Infrastructure.Services;
+namespace Caffe.Infrastructure.Services.Base;
 
 public class DateTimeService : IDateTime
 {

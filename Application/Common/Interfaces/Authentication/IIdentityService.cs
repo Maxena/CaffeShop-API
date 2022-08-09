@@ -1,6 +1,6 @@
 ﻿using Caffe.Application.Common.Models;
 
-namespace Caffe.Application.Common.Interfaces;
+namespace Caffe.Application.Common.Interfaces.Authentication;
 
 public interface IIdentityService
 {

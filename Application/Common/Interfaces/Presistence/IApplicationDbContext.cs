@@ -1,7 +1,7 @@
 ﻿using Caffe.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Caffe.Application.Common.Interfaces;
+namespace Caffe.Application.Common.Interfaces.Presistence;
 
 public interface IApplicationDbContext
 {
