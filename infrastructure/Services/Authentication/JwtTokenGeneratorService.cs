@@ -13,12 +13,10 @@ namespace Caffe.Infrastructure.Services.Authentication;
 public class JwtTokenGeneratorService : IJwtTokenGenerator
 {
     private readonly IDateTime _date;
-    private readonly IConfiguration _configuration;
     private readonly JwtSetting _jwtSetting;
 
-    public JwtTokenGeneratorService(IConfiguration configuration, IOptions<JwtSetting> jwtSetting, IDateTime date)
+    public JwtTokenGeneratorService(IOptions<JwtSetting> jwtSetting, IDateTime date)
     {
-        _configuration = configuration;
         _date = date;
         _jwtSetting = jwtSetting.Value;
     }

@@ -28,7 +28,6 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public DbSet<City> Cities { get; set; }
 
     #endregion
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
@@ -43,26 +42,21 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
         CleanString();
         return base.SaveChanges();
     }
-
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
     {
         CleanString();
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
-
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
         CleanString();
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
-
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         CleanString();
         return base.SaveChangesAsync(cancellationToken);
     }
-
-
     private void CleanString()
     {
         var changedEntities = ChangeTracker.Entries()

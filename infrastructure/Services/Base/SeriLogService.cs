@@ -9,17 +9,18 @@ public class SeriLogService : ISerilogService
 
     public SeriLogService(ILogger logger)
     {
-        _logger = logger;
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
+
 
     /// <summary>
     /// Custom Information Logging
     /// </summary>
     /// <param name="message"></param>
     /// <param name="ex"></param>
-    public void Info(string message, Exception ex)
+    public void Info(string message, Exception? ex)
     {
-        _logger.Information($"{message}{Get(ex)}");
+        _logger.Information(ex is not null ? $"{message}{Get(ex)}" : message);
     }
 
     /// <summary>
@@ -27,9 +28,9 @@ public class SeriLogService : ISerilogService
     /// </summary>
     /// <param name="message"></param>
     /// <param name="ex"></param>
-    public void Warn(string message, Exception ex)
+    public void Warn(string message, Exception? ex)
     {
-        _logger.Warning($"{message}{Get(ex)}");
+        _logger.Warning(ex is not null ? $"{message}{Get(ex)}" : message);
     }
 
     /// <summary>
@@ -37,9 +38,9 @@ public class SeriLogService : ISerilogService
     /// </summary>
     /// <param name="message"></param>
     /// <param name="ex"></param>
-    public void Verbose(string message, Exception ex)
+    public void Verbose(string message, Exception? ex)
     {
-        _logger.Verbose($"{message}{Get(ex)}");
+        _logger.Verbose(ex is not null ? $"{message}{Get(ex)}" : message);
     }
 
     /// <summary>
@@ -47,9 +48,9 @@ public class SeriLogService : ISerilogService
     /// </summary>
     /// <param name="message"></param>
     /// <param name="ex"></param>
-    public void Debug(string message, Exception ex)
+    public void Debug(string message, Exception? ex)
     {
-        _logger.Debug($"{message}{Get(ex)}");
+        _logger.Debug(ex is not null ? $"{message}{Get(ex)}" : message);
     }
 
     /// <summary>
@@ -57,9 +58,9 @@ public class SeriLogService : ISerilogService
     /// </summary>
     /// <param name="message"></param>
     /// <param name="ex"></param>
-    public void Error(string message, Exception ex)
+    public void Error(string message, Exception? ex)
     {
-        _logger.Error($"{message}{Get(ex)}");
+        _logger.Error(ex is not null ? $"{message}{Get(ex)}" : message);
     }
 
     /// <summary>
@@ -67,12 +68,12 @@ public class SeriLogService : ISerilogService
     /// </summary>
     /// <param name="message"></param>
     /// <param name="ex"></param>
-    public void Fetal(string message, Exception ex)
+    public void Fetal(string message, Exception? ex)
     {
-        _logger.Fatal($"{message}{Get(ex)}");
+        _logger.Fatal(ex is not null ? $"{message}{Get(ex)}" : message);
     }
 
-    private string Get(Exception exception)
+    private static string Get(Exception exception)
     {
         return exception == null
             ? string.Empty

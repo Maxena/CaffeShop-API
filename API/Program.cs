@@ -1,5 +1,10 @@
 using Caffe.Application;
+using Caffe.Application.Common.Interfaces.Authentication;
+using Caffe.Application.Common.Interfaces.Base;
 using Caffe.Infrastructure;
+using Caffe.Infrastructure.Services.Authentication;
+using Caffe.Infrastructure.Services.Base;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +15,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*
+ * ********************
+ * ***   SeriLog   ***
+ * ********************
+ */
+//builder.Host.UseSerilog();
 
+
+/*
+ * ********************
+ * ***   Injection  ***
+ * ********************
+ */
 builder.Services
-    .AddInfrastructureServices(builder.Configuration)
-    .AddApplicationServices(builder.Configuration);
+    .AddApplicationServices(builder.Configuration)
+    .AddInfrastructureServices(builder.Configuration);
+
 
 var app = builder.Build();
 

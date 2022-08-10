@@ -42,9 +42,10 @@ public static class ConfigureServices
 
         services.AddSingleton<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
-        services.AddSingleton<IJwtTokenGenerator, JwtTokenGeneratorService>();
         services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
-        services.AddTransient<ISerilogService, SeriLogService>();
+
+        services.AddTransient<ISerilogService, SeriLogService>(); // ?? 
+        services.AddSingleton<IJwtTokenGenerator, JwtTokenGeneratorService>(); // ?? 
 
 
         return services;
