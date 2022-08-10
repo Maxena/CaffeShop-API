@@ -1,5 +1,6 @@
 ﻿using Caffe.Application.Common.Interfaces.Authentication;
 using Caffe.Application.Common.Models;
+using Caffe.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

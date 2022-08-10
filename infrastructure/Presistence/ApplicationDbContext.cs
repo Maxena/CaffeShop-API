@@ -1,13 +1,14 @@
-﻿using System.Reflection;
+﻿using System.Data;
+using System.Reflection;
 using Caffe.Application.Common.Interfaces.Presistence;
-using Caffe.Domain.Entities;
+using Caffe.Domain.Entities.Auth;
 using Caffe.Infrastructure.Common;
-using Caffe.Infrastructure.Identity;
-using Caffe.Infrastructure.Presistence.Interceptors;
+using Duende.IdentityServer.EntityFramework.Entities;
 using Duende.IdentityServer.EntityFramework.Options;
-using MediatR;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Options;
 
 namespace Caffe.Infrastructure.Presistence;
@@ -16,12 +17,10 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
 {
     public ApplicationDbContext(
         DbContextOptions<ApplicationDbContext> options,
-        IOptions<OperationalStoreOptions> operationalStoreOptions)
-        : base(options, operationalStoreOptions)
+        IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
     {
     }
 
-    public DbSet<Book> Books { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

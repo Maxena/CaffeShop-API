@@ -2,6 +2,7 @@
 using Caffe.Application.Common.Interfaces.Base;
 using Caffe.Application.Common.Interfaces.Files;
 using Caffe.Application.Common.Interfaces.Presistence;
+using Caffe.Domain.Entities.Auth;
 using Caffe.Infrastructure.Identity;
 using Caffe.Infrastructure.Presistence;
 using Caffe.Infrastructure.Services.Authentication;

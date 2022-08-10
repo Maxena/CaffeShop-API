@@ -1,4 +1,4 @@
-﻿using Caffe.Infrastructure.Identity;
+﻿using Caffe.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
