@@ -5,6 +5,7 @@ namespace Caffe.Application.Common.Interfaces.Presistence;
 
 public interface IApplicationDbContext
 {
+    public DbSet<City> Cities { get; set; }
     int SaveChanges();
     int SaveChanges(bool acceptAllChangesOnSuccess);
     Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default);

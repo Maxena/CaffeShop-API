@@ -25,7 +25,7 @@ public class IdentityService : IIdentityService
 
     public async Task<string> GetUserNameAsync(string userId)
     {
-        var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
+        var user = await _userManager.Users.FirstAsync(u => u.Id.ToString() == userId);
 
         return user.UserName;
     }
@@ -40,19 +40,19 @@ public class IdentityService : IIdentityService
 
         var result = await _userManager.CreateAsync(user, password);
 
-        return (result.ToApplicationResult(), user.Id);
+        return (result.ToApplicationResult(), user.Id.ToString());
     }
 
     public async Task<bool> IsInRoleAsync(string userId, string role)
     {
-        var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+        var user = _userManager.Users.SingleOrDefault(u => u.Id.ToString() == userId);
 
         return user != null && await _userManager.IsInRoleAsync(user, role);
     }
 
     public async Task<bool> AuthorizeAsync(string userId, string policyName)
     {
-        var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+        var user = _userManager.Users.SingleOrDefault(u => u.Id.ToString() == userId);
 
         if (user == null)
         {
@@ -68,7 +68,7 @@ public class IdentityService : IIdentityService
 
     public async Task<Result> DeleteUserAsync(string userId)
     {
-        var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+        var user = _userManager.Users.SingleOrDefault(u => u.Id.ToString() == userId);
 
         return user != null ? await DeleteUserAsync(user) : Result.Success();
     }

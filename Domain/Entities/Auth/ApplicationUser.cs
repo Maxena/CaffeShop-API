@@ -7,7 +7,6 @@ public class ApplicationUser : IdentityUser, IBaseAuditableEntity
 {
     [PersonalData]
     public string FirstName { get; set; }
-
     [PersonalData]
     public string LastName { get; set; }
 
@@ -28,15 +27,6 @@ public class ApplicationUser : IdentityUser, IBaseAuditableEntity
 
     #region Relations
     public virtual City City { get; set; }
-
-    public virtual ICollection<ApplicationUserClaim> Claims { get; set; }
-
-    public virtual ICollection<ApplicationUserLogin> Logins { get; set; }
-
-    public virtual ICollection<ApplicationUserToken> Tokens { get; set; }
-
-    public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
-
-
+    
     #endregion
 }

@@ -1,11 +1,13 @@
 ﻿using System.Data;
 using System.Reflection;
 using Caffe.Application.Common.Interfaces.Presistence;
+using Caffe.Domain.Entities;
 using Caffe.Domain.Entities.Auth;
 using Caffe.Infrastructure.Common;
 using Duende.IdentityServer.EntityFramework.Entities;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -22,6 +24,11 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     }
 
 
+    #region Entities
+    public DbSet<City> Cities { get; set; }
+
+    #endregion
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
@@ -31,7 +38,6 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
     }
-
     public override int SaveChanges()
     {
         CleanString();
