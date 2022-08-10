@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using System.Reflection;
 using Caffe.Application.Common.Interfaces.Presistence;
-using Caffe.Domain.Entities;
 using Caffe.Domain.Entities.Auth;
+using Caffe.Domain.Entities.County;
 using Caffe.Infrastructure.Common;
 using Duende.IdentityServer.EntityFramework.Entities;
 using Duende.IdentityServer.EntityFramework.Options;

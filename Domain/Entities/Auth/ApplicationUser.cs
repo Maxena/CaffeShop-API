@@ -1,4 +1,5 @@
-﻿using Caffe.Domain.Enums;
+﻿using Caffe.Domain.Entities.County;
+using Caffe.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace Caffe.Domain.Entities.Auth;

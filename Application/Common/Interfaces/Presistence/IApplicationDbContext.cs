@@ -1,4 +1,4 @@
-﻿using Caffe.Domain.Entities;
+﻿using Caffe.Domain.Entities.County;
 using Microsoft.EntityFrameworkCore;
 
 namespace Caffe.Application.Common.Interfaces.Presistence;

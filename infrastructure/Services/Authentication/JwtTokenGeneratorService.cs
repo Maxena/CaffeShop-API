@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper.Configuration;
 using Caffe.Application.Common.Interfaces.Authentication;
 using Caffe.Application.Common.Interfaces.Presistence;
 using Caffe.Domain.Entities.Auth;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -46,7 +44,7 @@ public class JwtTokenGeneratorService : IJwtTokenGenerator
             issuer: _jwtSetting.Issuer,
             audience: _jwtSetting.Audience,
             claims: claims,
-            expires: _date.Now.AddDays(_jwtSetting.ExpireInMonth),
+            expires: _date.Now.AddMonths(_jwtSetting.ExpireInMonth),
             signingCredentials: signingCredentials);
 
 

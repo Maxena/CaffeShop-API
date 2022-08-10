@@ -38,7 +38,7 @@ namespace Caffe.Application
                     }
                 })
                 .WriteTo.Console()
-                .WriteTo.Seq("http://127.0.0.1:8443")
+                .WriteTo.Seq("http://116.203.234.94:8443")
                 .Enrich.FromLogContext()
                 .Enrich.WithExceptionDetails()
                 .Enrich.WithEnvironmentName()
@@ -48,8 +48,8 @@ namespace Caffe.Application
             services.AddLogging(
                 _ => _.AddSerilog(_serilog));
 
-            
-            
+
+
             return services;
         }
     }

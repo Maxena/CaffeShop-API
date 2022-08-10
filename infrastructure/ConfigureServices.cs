@@ -40,10 +40,11 @@ public static class ConfigureServices
 
         services.Configure<JwtSetting>(configuration.GetSection(Jwt));
 
-        services.AddTransient<IDateTime, DateTimeService>();
+        services.AddSingleton<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGeneratorService>();
         services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
+        services.AddTransient<ISerilogService, SeriLogService>();
 
 
         return services;

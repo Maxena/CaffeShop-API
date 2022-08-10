@@ -1,6 +1,6 @@
 ﻿using Caffe.Domain.Entities.Auth;
 
-namespace Caffe.Domain.Entities;
+namespace Caffe.Domain.Entities.County;
 
 public class City : BaseAuditableEntity
 {
