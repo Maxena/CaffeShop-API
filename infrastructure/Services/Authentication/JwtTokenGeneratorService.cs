@@ -14,29 +14,24 @@ public class JwtTokenGeneratorService : IJwtTokenGenerator
 {
     private readonly IDateTime _date;
     private readonly JwtSetting _jwtSetting;
+    private readonly IIdentityService _identity;
 
-    public JwtTokenGeneratorService(IOptions<JwtSetting> jwtSetting, IDateTime date)
+    public JwtTokenGeneratorService(IOptions<JwtSetting> jwtSetting, IDateTime date, IIdentityService identity)
     {
         _date = date;
+        _identity = identity;
         _jwtSetting = jwtSetting.Value;
     }
 
 
-    public string GenerateToken(ApplicationUser user)
+    public async Task<string> GenerateToken(ApplicationUser user)
     {
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_jwtSetting.Key)),
             SecurityAlgorithms.HmacSha256);
 
-
-        var claims = new List<Claim>
-        {
-            new(ClaimTypes.NameIdentifier,user.UserName),
-            new (ClaimTypes.PrimarySid,user.Id),
-            new (ClaimTypes.MobilePhone,user.PhoneNumber),
-            new (ClaimTypes.Hash,user.PasswordHash)
-        };
+        var claims = await _identity.GetUserClaims(user.Id.ToString());
 
         var securityToken = new JwtSecurityToken(
             issuer: _jwtSetting.Issuer,

@@ -4,5 +4,5 @@ namespace Caffe.Application.Common.Interfaces.Authentication;
 
 public interface IJwtTokenGenerator
 {
-    string GenerateToken(ApplicationUser user);
+    Task<string> GenerateToken(ApplicationUser user);
 }

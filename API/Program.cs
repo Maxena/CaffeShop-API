@@ -1,26 +1,15 @@
+using Caffe.API;
 using Caffe.Application;
-using Caffe.Application.Common.Interfaces.Authentication;
-using Caffe.Application.Common.Interfaces.Base;
 using Caffe.Infrastructure;
-using Caffe.Infrastructure.Services.Authentication;
-using Caffe.Infrastructure.Services.Base;
-using Serilog;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-/*
- * ********************
- * ***   SeriLog   ***
- * ********************
- */
-//builder.Host.UseSerilog();
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen();
 
 
 /*
@@ -30,22 +19,48 @@ builder.Services.AddSwaggerGen();
  */
 builder.Services
     .AddApplicationServices(builder.Configuration)
-    .AddInfrastructureServices(builder.Configuration);
+    .AddInfrastructureServices(builder.Configuration)
+    .AddApiServices(builder.Configuration);
 
 
+/*
+ * ********************
+ * ***  MiddleWares ***
+ * ********************
+ */
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Caffe API V1");
+    c.SwaggerEndpoint("/swagger/v2.0/swagger.json", "Caffe API V2");
+});
+
+//var provider = app..GetService<IApiVersionDescriptionProvider>();
+//app.UseSwaggerUI(
+//    options =>
+//    {
+//        options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+//        // build a swagger endpoint for each discovered API version  
+//        foreach (var description in provider.ApiVersionDescriptions)
+//            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+//    });
+
+app.UseApiVersioning();
+
+app.UseRouting();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.Run();

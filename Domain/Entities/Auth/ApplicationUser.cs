@@ -28,6 +28,6 @@ public class ApplicationUser : IdentityUser, IBaseAuditableEntity
 
     #region Relations
     public virtual City City { get; set; }
-    
+
     #endregion
 }

@@ -15,11 +15,10 @@ using Microsoft.Extensions.Options;
 
 namespace Caffe.Infrastructure.Presistence;
 
-public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
     public ApplicationDbContext(
-        DbContextOptions<ApplicationDbContext> options,
-        IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
+        DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
 
@@ -33,6 +32,14 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(builder);
+
+        builder.Entity<ApplicationUser>(e => e.ToTable("Users"));
+        builder.Entity<IdentityRole>(e => e.ToTable("Roles"));
+        builder.Entity<IdentityRoleClaim<string>>(e => e.ToTable("RoleClaims"));
+        builder.Entity<IdentityUserRole<string>>(e => e.ToTable("UserRoles"));
+        builder.Entity<IdentityUserClaim<string>>(e => e.ToTable("UserClaims"));
+        builder.Entity<IdentityUserLogin<string>>(e => e.ToTable("UserLogins"));
+        builder.Entity<IdentityUserToken<string>>(e => e.ToTable("UserTokens"));
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
