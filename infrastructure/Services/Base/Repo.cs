@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Caffe.Infrastructure.Services.Base;
 
-public class Repo<T> : IRepo<T> where T : BaseEntity
+public class Repo<T> : IRepo<T> where T : class, IBaseAuditableEntity
 {
     protected readonly ApplicationDbContext Context;
     protected readonly DbSet<T> Entities;

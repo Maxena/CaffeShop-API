@@ -2,13 +2,16 @@
 
 namespace Caffe.Domain.Common;
 
-public abstract class BaseEntity
+
+public interface IEntity
+{
+    public Guid Id { get; set; }
+}
+public abstract class BaseEntity : IEntity
 {
     public Guid Id { get; set; }
 
     private readonly List<BaseEvent> _domainEvents = new();
-
-
     [NotMapped]
     public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
 
@@ -26,4 +29,5 @@ public abstract class BaseEntity
     {
         _domainEvents.Clear();
     }
+
 }

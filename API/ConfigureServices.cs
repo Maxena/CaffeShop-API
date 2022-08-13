@@ -53,25 +53,12 @@ public static class ConfigureServices
 
         services.AddSwaggerGen(c =>
         {
-            c.DocInclusionPredicate((docName, apiDesc) =>
-            {
-                if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
-                {
-                    return false;
-                }
-
-                var versions = methodInfo.DeclaringType
-                    .GetCustomAttributes(true)
-                    .OfType<ApiVersionAttribute>()
-                    .SelectMany(a => a.Versions);
-
-                return versions.Any(v => $"v{v.ToString()}" == docName);
-            });
+  
 
             c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "My API", Version = "v1.0" });
             c.SwaggerDoc("v2.0", new OpenApiInfo { Title = "My API", Version = "v2.0" });
 
-
+            c.EnableAnnotations();
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -122,24 +109,24 @@ public static class ConfigureServices
 
         #region versioning and swagger service 
 
-        services.AddApiVersioning(option =>
-        {
-            option.AssumeDefaultVersionWhenUnspecified = true;
-            option.DefaultApiVersion = new ApiVersion(1, 0);
-            option.ReportApiVersions = true;
-            option.ApiVersionReader = ApiVersionReader.Combine(
-                new QueryStringApiVersionReader("api-version"),
-                new HeaderApiVersionReader("X-Version"),
-                new MediaTypeApiVersionReader("ver"));
-        });
+        //services.AddApiVersioning(option =>
+        //{
+        //    option.AssumeDefaultVersionWhenUnspecified = true;
+        //    option.DefaultApiVersion = new ApiVersion(1, 0);
+        //    option.ReportApiVersions = true;
+        //    option.ApiVersionReader = ApiVersionReader.Combine(
+        //        new QueryStringApiVersionReader("api-version"),
+        //        new HeaderApiVersionReader("X-Version"),
+        //        new MediaTypeApiVersionReader("ver"));
+        //});
 
-        services.AddVersionedApiExplorer(options =>
-        {
-            options.GroupNameFormat = "'v'VVV";
-            options.SubstituteApiVersionInUrl = true;
-            options.AssumeDefaultVersionWhenUnspecified = true;
-            options.DefaultApiVersion = new ApiVersion(1, 0);
-        });
+        //services.AddVersionedApiExplorer(options =>
+        //{
+        //    options.GroupNameFormat = "'v'VVV";
+        //    options.SubstituteApiVersionInUrl = true;
+        //    options.AssumeDefaultVersionWhenUnspecified = true;
+        //    options.DefaultApiVersion = new ApiVersion(1, 0);
+        //});
 
         #endregion
 

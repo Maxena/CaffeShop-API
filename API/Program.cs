@@ -2,15 +2,14 @@ using Caffe.API;
 using Caffe.Application;
 using Caffe.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//ApiVersionDescriptor
+
+
 builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen();
-
 
 /*
  * ********************

@@ -10,17 +10,14 @@ public class ApplicationUser : IdentityUser, IBaseAuditableEntity
     public string FirstName { get; set; }
     [PersonalData]
     public string LastName { get; set; }
-
     [PersonalData]
     public string SnapShot { get; set; }
-
     [PersonalData]
     public DateTime DateOfBirth { get; set; }
-
     [PersonalData]
     public Gender Gender { get; set; }
-
     public Guid CityId { get; set; }
+    public Guid Id { get; set; }
     public DateTime Created { get; set; }
     public string? CreatedBy { get; set; }
     public DateTime? LastModified { get; set; }

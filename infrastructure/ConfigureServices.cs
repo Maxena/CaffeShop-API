@@ -128,7 +128,8 @@ public static class ConfigureServices
         services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
         services.AddSingleton<IDateTime, DateTimeService>();
         services.AddScoped<ICurrentUser, CurrentUser>();
-
+        services.AddTransient<IAuthService, AuthService>();
+        
         return services;
     }
 }

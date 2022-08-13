@@ -2,14 +2,17 @@
 
 public interface IBaseAuditableEntity
 {
+    public Guid Id { get; set; }
     DateTime Created { get; set; }
     string? CreatedBy { get; set; }
     DateTime? LastModified { get; set; }
     string? LastModifiedBy { get; set; }
 }
 
-public abstract class BaseAuditableEntity : BaseEntity, IBaseAuditableEntity
+public abstract class BaseAuditableEntity : IBaseAuditableEntity
 {
+    public Guid Id { get; set; }
+
     public DateTime Created { get; set; }
 
     public string? CreatedBy { get; set; }

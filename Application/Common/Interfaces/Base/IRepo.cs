@@ -3,7 +3,7 @@ using Caffe.Domain.Common;
 
 namespace Caffe.Application.Common.Interfaces.Base;
 
-public interface IRepo<T> where T : BaseEntity
+public interface IRepo<T> where T : class, IBaseAuditableEntity
 {
     Task<List<T>> GetAllAsync();
     Task<List<T>> GetAllAsync(Expression<Func<T, bool>> condition);
