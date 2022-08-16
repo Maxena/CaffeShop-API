@@ -6,5 +6,5 @@ namespace Caffe.Application.Common.Interfaces.Authentication;
 
 public interface IAuthService : IRepo<ApplicationUser>
 {
-    Task<RegisterUserRes> RegisterUser(RegisterUserReq req);
+    Task<RegisterUserRes> RegisterUser(RegisterUserReq req,string UserId);
 }

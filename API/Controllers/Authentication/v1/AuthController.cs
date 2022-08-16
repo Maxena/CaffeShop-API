@@ -46,7 +46,7 @@ namespace Caffe.API.Controllers.Authentication.v1
                 _serilog.Info("Registering User ...", null);
                 //create application user type from req
 
-                var result = await _authService.RegisterUser(req);
+                var result = await _authService.RegisterUser(req,UserId);
 
                 _serilog.Info("user registered successfully", null);
 

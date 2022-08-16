@@ -1,4 +1,5 @@
 ﻿using Caffe.Application.Common.Interfaces.Authentication;
+using Caffe.Application.Common.Interfaces.Presistence;
 using Caffe.Application.Common.Models.Dtos.Auth;
 using Caffe.Domain.Entities.Auth;
 using Caffe.Infrastructure.Identity;
@@ -10,11 +11,19 @@ namespace Caffe.Infrastructure.Services.Authentication;
 
 public class AuthService : Repo<ApplicationUser>, IAuthService
 {
-    public AuthService(ApplicationDbContext dbContext) : base(dbContext)
+    #region Construct Area
+
+    private readonly IIdentityService _identityService;
+    private readonly IDateTime _date;
+    public AuthService(ApplicationDbContext dbContext, IIdentityService identityService, IDateTime date) : base(dbContext)
     {
+        _identityService = identityService ?? throw new ArgumentNullException(nameof(identityService));
+        _date = date ?? throw new ArgumentNullException(nameof(date));
     }
 
-    public async Task<RegisterUserRes> RegisterUser(RegisterUserReq req)
+    #endregion
+
+    public async Task<RegisterUserRes> RegisterUser(RegisterUserReq req, string UserId)
     {
         var user = new ApplicationUser
         {
