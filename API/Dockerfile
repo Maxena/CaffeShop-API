@@ -25,7 +25,7 @@ RUN echo $TZ > /etc/timezone && \
 COPY "API/API.csproj" "API/"
 COPY "Application/Application.csproj" "Application/"
 COPY "Domain/Domain.csproj" "Domain/"
-COPY "Infrastructure/Infrastructure.csproj" "Infrastructure/"
+COPY "infrastructure/infrastructure.csproj" "Infrastructure/"
 
 #######################
 ## Restore Packages  ##
