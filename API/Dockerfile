@@ -21,10 +21,11 @@ RUN echo $TZ > /etc/timezone && \
 #######################
 ## Copy Dependencies ##
 #######################
-COPY "API.csproj" "API/"
-COPY "../Application/Application.csproj" "Application/"
-COPY "../Domain/Domain.csproj" "Domain/"
-COPY "../Infrastructure/Infrastructure.csproj" "Infrastructure/"
+
+COPY "API/API.csproj" "API/"
+COPY "Application/Application.csproj" "Application/"
+COPY "Domain/Domain.csproj" "Domain/"
+COPY "Infrastructure/Infrastructure.csproj" "Infrastructure/"
 
 #######################
 ## Restore Packages  ##

@@ -18,11 +18,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution-Items", "Solution-Items", "{E81FE1D2-8736-4391-912A-1FD735D89BF8}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		caffe-api.env = caffe-api.env
 		docker-compose.yml = docker-compose.yml
 		Jenkinsfile = Jenkinsfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Proxy", "Proxy", "{1934CC54-D09D-4981-AD8A-F8E4758DBCD9}"
+	ProjectSection(SolutionItems) = preProject
+		HealthCheck.sql = HealthCheck.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
