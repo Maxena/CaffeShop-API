@@ -30,6 +30,7 @@ namespace Caffe.API.Controllers.Authentication.v1
         public IActionResult HealthCheck()
         {
             //check the webhost environment
+            _serilog.Info($"Health check has been called --> _env is : {_env.EnvironmentName}", null);
             return Ok(_env.EnvironmentName);
         }
 
@@ -46,7 +47,7 @@ namespace Caffe.API.Controllers.Authentication.v1
                 _serilog.Info("Registering User ...", null);
                 //create application user type from req
 
-                var result = await _authService.RegisterUser(req,UserId);
+                var result = await _authService.RegisterUser(req, UserId);
 
                 _serilog.Info("user registered successfully", null);
 
