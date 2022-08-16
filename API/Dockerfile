@@ -1,7 +1,9 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5000
+EXPOSE 5001
+ENV ASPNETCORE_URLS=http://*:5000,https://*:5001
+
 USER root
 
 RUN apt-get update && apt-get upgrade -y \
@@ -49,10 +51,10 @@ RUN dotnet publish "API.csproj" -c Release -o /app/publish
 #######################
 ## Run Project       ##
 #######################
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-bullseye-slim as final-env
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 as final-env
 WORKDIR /app
 COPY --from=publish-env /app/publish /app
-ENTRYPOINT [ "dotnet", "API.dll" ]
+ENTRYPOINT [ "dotnet", "Caffe.API.dll" ]
 
 
 
