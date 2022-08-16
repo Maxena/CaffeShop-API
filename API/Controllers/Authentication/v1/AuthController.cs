@@ -45,5 +45,6 @@ namespace Caffe.API.Controllers.Authentication.v1
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        
     }
 }

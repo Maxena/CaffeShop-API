@@ -61,7 +61,7 @@ public static class ConfigureServices
             c.EnableAnnotations();
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            string? xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
             c.IncludeXmlComments(xmlPath);
 

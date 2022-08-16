@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: caffe-api
+    image: caffe-api:v1.0
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    volumes:
+      - Caffe-API:/app/API
+    networks:
+      - Caffe-API
+    ports:
+      - "4000:5000"
+      - "4001:5001"
+    restart: always
+    env_file:
+      - caffe-api.env
+    # links:
+    #   - caffe-sql-server
+    #   - caffe-redis-server
+    #   - caffe-postgresql-server
+    #   - caffe-proxy
+
+volumes:
+  Caffe-API:
+    external: false
+
+networks:
+  Caffe-API:
+    driver: bridge
+    external: false
