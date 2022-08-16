@@ -58,7 +58,7 @@ app.UseResponseCompression();
 
 app.UseRouting();
 
-app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(x => true).AllowCredentials());
+app.UseCors("AnyOriginPolicy");
 
 app.UseApiVersioning();
 

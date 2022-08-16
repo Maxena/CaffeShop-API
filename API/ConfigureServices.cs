@@ -17,7 +17,7 @@ public static class ConfigureServices
         services.AddHttpContextAccessor();
 
         services.AddHttpsRedirection(
-            o => o.HttpsPort = 4001);
+            o => o.HttpsPort = 5001);
 
         services.AddCors(
             c =>
