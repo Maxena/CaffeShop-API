@@ -55,6 +55,14 @@ RUN dotnet publish "API.csproj" -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 as final-env
 WORKDIR /app
 COPY --from=publish-env /app/publish /app
+
+#######################
+## Set The Secrets   ##
+#######################
+RUN dotnet user-secrets init
+RUN dotnet user-secrets set "ApiSettings:JwtSettings:Key" "Super-secret-key-from-api-in-docker-container"
+RUN dotnet user-secrets list
+
 ENTRYPOINT [ "dotnet", "Caffe.API.dll" ]
 
 
