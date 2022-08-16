@@ -51,9 +51,9 @@ RUN dotnet publish "API.csproj" -c Release -o /app/publish
 #######################
 ## Set The Secrets   ##
 #######################
-RUN dotnet user-secrets init --project "API/API.csproj"
-RUN dotnet user-secrets set "ApiSettings:JwtSettings:Key" "Super-secret-key-from-api-in-docker-container" --project "API/API.csproj"
-RUN dotnet user-secrets list --project "API/API.csproj"
+RUN dotnet user-secrets init
+RUN dotnet user-secrets set "ApiSettings:JwtSettings:Key" "Super-secret-key-from-api-in-docker-container"
+RUN dotnet user-secrets list
 
 #######################
 ## Run Project       ##
