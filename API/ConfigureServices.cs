@@ -15,6 +15,9 @@ public static class ConfigureServices
     {
         services.AddHttpContextAccessor();
 
+        services.AddHttpsRedirection(
+            o => o.HttpsPort = 4001);
+
         services.AddCors(
             c =>
                 c.AddPolicy("AnyOriginPolicy", builder => builder
@@ -53,7 +56,7 @@ public static class ConfigureServices
 
         services.AddSwaggerGen(c =>
         {
-  
+
 
             c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "My API", Version = "v1.0" });
             c.SwaggerDoc("v2.0", new OpenApiInfo { Title = "My API", Version = "v2.0" });

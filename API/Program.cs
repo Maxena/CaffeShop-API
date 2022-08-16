@@ -42,7 +42,7 @@ app.UseSwaggerUI(c =>
 //    options =>
 //    {
 //        options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
-//        // build a swagger endpoint for each discovered API version  
+//        // build a swagger endpoint for each discovered API version
 //        foreach (var description in provider.ApiVersionDescriptions)
 //            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
 //    });
