@@ -9,11 +9,17 @@ services:
       dockerfile: API/Dockerfile
     volumes:
       - Caffe-API:/app/API
+      - ${HOME}/.aspnet/https:/https/
     networks:
       - Caffe-API
     ports:
-      - "4000:5000"
-      - "4001:5001"
+      - "4000:80"
+      - "4001:443"
+    environment:
+      - ASPNETCORE_URLS="https://+443;http://+80"
+      - ASPNETCORE_HTTPS_PORT=443
+      - ASPNETCORE_Kestrel__Certificates__Default__Password="Fckgwrhqq2!@#"
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/caffeapi.pfx
     restart: always
     # env_file:
     #   - caffe-api.env

@@ -1,9 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
-EXPOSE 5000
-EXPOSE 5001
-ENV ASPNETCORE_URLS="https://*:5001;http://*:5000"
-# ENV ASPNETCORE_ENVIRONMENT=Production
+
+# ENV ASPNETCORE_URLS=https://+:443;http://+:80
+# ENV ASPNETCORE_ENVIRONMENT=Development
+# ENV ASPNETCORE_Kestrel__Certificates__Default__Password=Fckgwrhqq2!@#
+# ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/https/caffeapi.pfx
 
 USER root
 
@@ -51,12 +52,12 @@ RUN dotnet publish "API.csproj" -c Release -o /app/publish
 #######################
 ## Set The Secrets   ##
 #######################
-RUN dotnet user-secrets init
-RUN dotnet user-secrets set "ApiSettings:JwtSettings:Key" "Super-secret-key-from-api-in-docker-container"
-RUN dotnet user-secrets list
-RUN dotnet dev-certs https --clean
-RUN dotnet dev-certs https -ep /app/certs/Caffe-Api.pfx -p Fckgwrhqq2!@# \
-    && dotnet dev-certs https --trust
+# RUN dotnet user-secrets init
+# RUN dotnet user-secrets set "ApiSettings:JwtSettings:Key" "Super-secret-key-from-api-in-docker-container"
+# RUN dotnet user-secrets list
+# RUN dotnet dev-certs https --clean
+# RUN dotnet dev-certs https -ep /app/certs/Caffe-Api.pfx -p Fckgwrhqq2!@# \
+#     && dotnet dev-certs https --trust
 
 #######################
 ## Run Project       ##
