@@ -2,8 +2,10 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
 EXPOSE 5000
 EXPOSE 5001
-ENV ASPNETCORE_URLS=http://*:5000,https://*:5001
-ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS="https://+;http://+"
+ENV ASPNETCORE_HTTPS_PORT=5001
+ENV ASPNETCORE_HTTP_PORT=5000
+# ENV ASPNETCORE_ENVIRONMENT=Production
 
 USER root
 
@@ -54,6 +56,9 @@ RUN dotnet publish "API.csproj" -c Release -o /app/publish
 RUN dotnet user-secrets init
 RUN dotnet user-secrets set "ApiSettings:JwtSettings:Key" "Super-secret-key-from-api-in-docker-container"
 RUN dotnet user-secrets list
+RUN dotnet dev-certs https clean
+RUN dotnet dev-certs https -ep /app/certs/Caffe-Api.pfx -p Fckgwrhqq2!@# \
+    && dotnet dev-certs https --trust
 
 #######################
 ## Run Project       ##

@@ -15,8 +15,8 @@ services:
       - "4000:5000"
       - "4001:5001"
     restart: always
-    env_file:
-      - caffe-api.env
+    # env_file:
+    #   - caffe-api.env
     # links:
     #   - caffe-sql-server
     #   - caffe-redis-server
