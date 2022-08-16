@@ -56,7 +56,7 @@ RUN dotnet publish "API.csproj" -c Release -o /app/publish
 RUN dotnet user-secrets init
 RUN dotnet user-secrets set "ApiSettings:JwtSettings:Key" "Super-secret-key-from-api-in-docker-container"
 RUN dotnet user-secrets list
-RUN dotnet dev-certs https clean
+RUN dotnet dev-certs https --clean
 RUN dotnet dev-certs https -ep /app/certs/Caffe-Api.pfx -p Fckgwrhqq2!@# \
     && dotnet dev-certs https --trust
 
