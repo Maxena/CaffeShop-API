@@ -1,6 +1,7 @@
 using Caffe.API;
 using Caffe.Application;
 using Caffe.Infrastructure;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -37,19 +38,29 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v2.0/swagger.json", "Caffe API V2");
 });
 
-//var provider = app..GetService<IApiVersionDescriptionProvider>();
-//app.UseSwaggerUI(
-//    options =>
-//    {
-//        options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
-//        // build a swagger endpoint for each discovered API version
-//        foreach (var description in provider.ApiVersionDescriptions)
-//            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-//    });
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseDeveloperExceptionPage();
+    app.UseHsts();
+}
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 
-app.UseApiVersioning();
+app.UseResponseCaching();
+
+app.UseResponseCompression();
 
 app.UseRouting();
+
+app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(x => true).AllowCredentials());
+
+app.UseApiVersioning();
 
 app.UseHttpsRedirection();
 

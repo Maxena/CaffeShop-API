@@ -1,5 +1,6 @@
 ﻿using System.IO.Compression;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -50,7 +51,8 @@ public static class ConfigureServices
         });
 
 
-        services.AddControllers();
+        services.AddControllers().AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+        services.AddEndpointsApiExplorer();
 
         #region Swagger
 
@@ -110,7 +112,7 @@ public static class ConfigureServices
 
         #endregion
 
-        #region versioning and swagger service 
+        #region versioning and swagger service
 
         //services.AddApiVersioning(option =>
         //{
