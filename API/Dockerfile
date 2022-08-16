@@ -25,14 +25,14 @@ RUN echo $TZ > /etc/timezone && \
 COPY "API/API.csproj" "API/"
 COPY "Application/Application.csproj" "Application/"
 COPY "Domain/Domain.csproj" "Domain/"
-COPY "infrastructure/infrastructure.csproj" "Infrastructure/"
+COPY "infrastructure/infrastructure.csproj" "infrastructure/"
 
 #######################
 ## Restore Packages  ##
 #######################
 RUN dotnet restore "API/API.csproj"
 
-COPY ../* ./
+COPY . ./
 
 #######################
 ## Build Project     ##
